@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 
 const QrCode = () => {
   const [url, setUrl] = useState("");
+  const qrRef = useRef();
 
   const downloadQRCode = (e) => {
     e.preventDefault();
+    let canvas = qrRef.current.querySelector("canvas");
+    let image = canvas.toDataURL("image/png");
+    let anchor = document.createElement("a");
+    anchor.href = image;
+    anchor.download = `qr-code.png`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
     setUrl("");
   };
 
@@ -24,15 +33,15 @@ const QrCode = () => {
   );
   return (
     <div className="qrcode__container">
-      <div>{qrcode}</div>
+      <div ref={qrRef}>{qrcode}</div>
       <div className="input__group">
         <form onSubmit={downloadQRCode}>
-          <label>Enter URL</label>
+          <label>herhangi isim veya url girin</label>
           <input
             type="text"
             value={url}
             onChange={qrCodeEncoder}
-            placeholder="https://hackernoon.com"
+            placeholder="https://denizindünyasi.com"
           />
           <button type="submit" disabled={!url}>
             Download QR code
