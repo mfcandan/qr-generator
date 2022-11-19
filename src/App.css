@@ -62,6 +62,8 @@ button {
   .qrcode__container {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
   .input__group {
     margin-left: 3em;
