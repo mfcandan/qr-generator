@@ -41,7 +41,7 @@ const QrCode = () => {
             type="text"
             value={url}
             onChange={qrCodeEncoder}
-            placeholder="https://denizindünyasi.com"
+            placeholder="https://deneme.com"
           />
           <button type="submit" disabled={!url}>
             Download QR code
